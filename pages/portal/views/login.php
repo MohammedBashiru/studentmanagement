@@ -3,8 +3,6 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 
-	include "../../../api/request.php";
-	// $api = new API();
   	$method = $_SERVER['REQUEST_METHOD'];
 
 	$error = false;
@@ -37,6 +35,7 @@
   <link rel="stylesheet" href="../pages/portal/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../pages/portal/assets/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="../pages/portal/assets/vendors/css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="../pages/portal/assets/css/sweetalert2.min.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -57,7 +56,7 @@
                 <div class="form-group">
                   <label class="label">Username</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Username">
+                    <input type="text" class="form-control" placeholder="Username" id="username" name="username">
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="mdi mdi-check-circle-outline"></i>
@@ -68,7 +67,7 @@
                 <div class="form-group">
                   <label class="label">Password</label>
                   <div class="input-group">
-                    <input type="password" class="form-control" placeholder="*********">
+                    <input type="password" class="form-control" placeholder="*********" id="password" name="password">
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <i class="mdi mdi-check-circle-outline"></i>
@@ -77,7 +76,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-primary submit-btn btn-block">Login</button>
+                  <button class="btn btn-primary submit-btn btn-block" id="submitBtn" type="button">Login</button>
                 </div>
                 <div class="form-group d-flex justify-content-between">
                   <div class="form-check form-check-flat mt-0">
@@ -89,7 +88,7 @@
                 </div>
                 <div class="text-block text-center my-3">
                   <span class="text-small font-weight-semibold">Not a member ?</span>
-                  <a href="register.html" class="text-black text-small">Create new account</a>
+                  <a href="#" class="text-black text-small">Create new account</a>
                 </div>
               </form>
             </div>
@@ -114,13 +113,74 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
+  <script src="../pages/portal/assets/vendors/js/jquery.js"></script>
   <script src="../pages/portal/assets/vendors/js/vendor.bundle.base.js"></script>
   <script src="../pages/portal/assets/vendors/js/vendor.bundle.addons.js"></script>
   <!-- endinject -->
   <!-- inject:js -->
   <script src="../pages/portal/assets/js/off-canvas.js"></script>
   <script src="../pages/portal/assets/js/misc.js"></script>
+  <script src="../pages/portal/assets/js/sweetalert2.min.js"></script>
   <!-- endinject -->
+
+  <script>
+
+  	$(document).ready(function(){
+  		// alert("We are ready")
+  		$("#submitBtn").on("click", function(){
+  			const username = $("#username").val();
+  			const password = $("#password").val();
+
+  			if ( username == "" ){
+  				showErrorAlert("Please enter username");
+  				$("#username").focus();
+  			}
+  			else if (password == "" ){
+  				showErrorAlert("Please enter Password");
+  			}
+  			else  {
+
+  				//Converting data object to JSON string
+  				//Before sending to server
+
+  				const dataToBeSent = JSON.stringify({
+  					action: 100,
+  					data: {
+  						username: username,
+  						password: password
+  					}
+  				})
+
+  				$.ajax({
+  					url: '../../../api/request.php',
+  					method: 'post',
+  					data: dataToBeSent,
+  					contentType: "application/json",
+  					success: function(data){
+  						location.href= "/";
+  					},
+  					error: function(e){
+  						console.log('Error occured with request ', e.responseJSON.message)
+  						showErrorAlert(e.responseJSON.message)
+  					}
+  				})
+  			}
+  		})
+
+
+
+  		function showErrorAlert(msg){
+  			Swal.fire({
+  			  type : 'error',
+			  title: 'Error Processing...',
+			  text: msg,
+			  animation: false,
+			  customClass: 'animated tada'
+			});
+  		}
+  	})
+
+  </script>
 </body>
 
 </html>
