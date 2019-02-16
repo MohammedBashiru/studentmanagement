@@ -1,0 +1,25 @@
+RewriteEngine on
+RewriteRule ^(/)?$ /pages/portal/views/home.php [L] 
+RewriteRule ^(login)?$ /pages/portal/views/login.php [L]
+RewriteRule ^(logout)?$ /pages/logout.php [L]
+RewriteRule ^(register)?$ /pages/register.php [L]
+RewriteRule ^(thank-you)?$ /pages/thanks.php [L]
+
+#Email
+RewriteRule ^(email-sent)?$ /pages/email_sent.php [L]
+
+#portal
+RewriteRule ^(portal)?$ /pages/portal/pages/home.php [L]
+RewriteRule ^(portal/ytd-videos)?$ /pages/portal/pages/ytd-videos.php [L]
+RewriteRule ^(portal/downloads)?$ /pages/portal/pages/downloads.php [L]
+RewriteRule ^(portal/payments)?$ /pages/portal/pages/payments.php [L]
+RewriteRule ^(portal/profile)?$ /pages/portal/pages/profile.php [L]
+
+
+#Admin
+RewriteRule ^(admin)?$ /pages/admin/pages/home.php [L]
+RewriteRule ^(admin/login)?$ /pages/admin/login.php [L]
+
+ErrorDocument 404 /pages/404.php
+ErrorDocument 400 /pages/500.php
+ErrorDocument 500 /pages/500.php
