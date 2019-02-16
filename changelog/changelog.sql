@@ -15,7 +15,7 @@
 	 `updated_at` datetime NOT NULL,
 	 `created_by` int(11) NOT NULL,
 	 PRIMARY KEY (`id`)
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 	CREATE TABLE `students` (
 	 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -31,7 +31,7 @@
 	 `updated_at` datetime NOT NULL,
 	 `created_by` int(11) NOT NULL,
 	 PRIMARY KEY (`id`)
-	) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+	) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 	CREATE TABLE `teachers` (
 	 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -45,7 +45,7 @@
 	 `updated_at` datetime NOT NULL,
 	 `created_by` int(11) NOT NULL,
 	 PRIMARY KEY (`id`)
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 	CREATE TABLE `timetable` (
 	 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -56,7 +56,7 @@
 	 `updated_at` datetime NOT NULL,
 	 `created_by` int(11) NOT NULL,
 	 PRIMARY KEY (`id`)
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 	CREATE USER 'std_db_user'@'localhost' IDENTIFIED BY '***';
 	GRANT ALL PRIVILEGES ON *.* TO 'std_db_user'@'localhost' IDENTIFIED BY '***' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
