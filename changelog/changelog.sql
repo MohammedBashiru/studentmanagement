@@ -63,6 +63,10 @@
 
 	GRANT ALL PRIVILEGES ON `std\_management`.* TO 'std_db_user'@'localhost' WITH GRANT OPTION;
 
+	-- 02/17/2019
+
+	ALTER TABLE `results` CHANGE `score` `exams` DOUBLE NOT NULL;
+
 
 
 
