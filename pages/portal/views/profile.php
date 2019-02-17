@@ -52,12 +52,11 @@
                           <label>Age</label>
                           <input type="number" class="form-control" name="Age" readonly="" value="<?php echo $user['age'] ?>">
                         </div>
-                        <form action="../../../api/upload.php" id="uploadForm" method="post" enctype="multipart/form-data" >
+                        <form action="../../../api/upload.php" id="uploadForm">
                           <div class="form-group">
                             <label>Profile Picture</label>
                             <input type="file" class="form-control" name="file" id="picture">
                           </div>
-                          <button>Send</button>
                         </form>
                         
 
@@ -82,41 +81,17 @@
  $(document).ready( function(){
 
   $("#saveImageBtn").on("click", function(){
-    var file = $("#picture");
-    var profileForm = $("#uploadForm");
-
-    console.log(profileForm);
-    
-
-    var form = new FormData();
-    form.append('file', file);
-
-    // var formData = new FormData();
-
-    // formData.append("username", "Groucho");
-    // formData.append("accountnum", 123456); // number 123456 is immediately converted to a string "123456"
-
-    // // HTML file input, chosen by user
-    // formData.append("userfile", fileInputElement.files[0]);
-
-    // // JavaScript file-like object
-    // var content = '<a id="a"><b id="b">hey!</b></a>'; // the body of the new file...
-    // var blob = new Blob([content], { type: "text/xml"});
-
-    // formData.append("webmasterfile", blob);
-
-    // var request = new XMLHttpRequest();
-    // request.open("POST", "http://foo.com/submitform.php");
-    // request.send(formData);
+    var formBody = $("#uploadForm");
+    var form = new FormData(formBody);
 
     $.ajax({
 
       url: '../../../api/upload.php',
       method: 'post',
-      data: profileForm,
+      data: form,
       contentType: "multipart/form-data",
-      // processData: false,
-      // contentType: false,
+      processData: false,
+      contentType: false,
       success: function(data){
         console.log("success ", data)
       },

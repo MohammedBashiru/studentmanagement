@@ -20,26 +20,10 @@
                 break;
 
             //--------------------------
-            // TASK MASTER ACTIONS
+            // REGISTERATION ACTIONS
             //--------------------------
-            case 102: //--Add Task
-                $response = TaskController::addTask($data);
-                echo json_encode($response);
-                // ResponseRouter::sendResponse(2006, $response);
-                break;
-            
-            case 103: //--Edit AdminProfile
-                $response = TaskController::updateTask($data);
-                echo json_encode($response);
-                break;
-            
-            case 104: //--Save Permissions
-                $response = TaskController::savePermissions($data);
-                echo json_encode($response);
-                break;
-
-            case 105: //--Update Permissions
-                $response = TaskController::updatePermissions($data);
+            case 102: //--Register User
+                $response = StudentController::registerStudent($data);
                 echo json_encode($response);
                 break;
 

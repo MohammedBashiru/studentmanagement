@@ -21,19 +21,30 @@
 				$username = trim(strip_tags($data["username"]));
 				$password = md5($data["password"]);
 
-				$results = DatabaseModel::loginStudent($username, $password);
-				if ( $results ){
+				$user = DatabaseModel::loginStudent($username, $password);
+				if ( $user )
+				{
 
-					$time = $_SERVER['REQUEST_TIME'];
- 					$_SESSION["student_id"] = $results["id"];
- 					$_SESSION["username"] = $results["email"];
- 					$_SESSION["full_name"] = $results["first_name"] . " " . $results["last_name"];
- 					$_SESSION["isStudentLogin"] = true;
- 					$_SESSION['LOGIN_TIME'] = $time;
+					if ($user['status'] == 1) 
+					{
+						$time = $_SERVER['REQUEST_TIME'];
+	 					$_SESSION["student_id"] = $user["id"];
+	 					$_SESSION["username"] = $user["username"];
+	 					$_SESSION["full_name"] = $user["first_name"] . " " . $user["last_name"];
+	 					$_SESSION["isStudentLogin"] = true;
+	 					$_SESSION['LOGIN_TIME'] = $time;
 
-					$response["status"] = 200;
-	                $response["message"] = "Login successful";
-					return Utils::sendResponse(200, $response);
+						$response["status"] = 200;
+		                $response["message"] = "Login successful";
+						return Utils::sendResponse(200, $response);
+					}
+					else
+					{
+						$response["status"] = 403;
+		                $response["message"] = "Your account is not yet active. Please contact the HeadMaster";
+						return Utils::sendResponse(403, $response);
+					}
+					
 				}
 				else {
 					$response["status"] = 403;

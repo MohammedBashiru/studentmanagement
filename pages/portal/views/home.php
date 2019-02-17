@@ -50,19 +50,6 @@
 	                        </tr>
 	                      </thead>
 	                      <tbody>
-	                      <?php foreach ($results as $result) {
-	                      	echo ('<tr>'.
-	                          '<td>' . $result["id"] . '</td>'.
-	                          '<td>' . $result["course"] . '</td>'.
-	                          '<td>' . $result["test"] . '</td>'.
-	                          '<td>' . $result["exams"] . '</td>'.
-	                          '<td>' . $result["total"] . '</td>'.
-	                          '<td>' . $cont->getGradeColor($result["grade"]) . '</td>'.
-	                          '<td>' . $result["term"] . '</td>'.
-	                          '<td>' . $result["year"] . '</td>'.
-	                        '</tr>');
-	                      } ?>
-
 	                      <?php foreach ($results as $result ) : ?>
 	                      	<tr>
 		                        <td><?= $result["id"] ?></td>

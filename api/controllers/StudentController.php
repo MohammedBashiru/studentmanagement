@@ -20,6 +20,18 @@
 			return DatabaseModel::getStudentResults();
 		}
 
+		public static function registerStudent(){
+			
+		}
+
+
+
+
+
+
+
+		/* THIS IS THE GRADE COLOURS WHICH SHOWS THE GRADES */
+
 		public function getGradeColor($grade){
 
 			if ( $grade == "A1" ){
