@@ -13,7 +13,7 @@
   // die();
   $redirect_url = $_SERVER["REDIRECT_URL"];
 
-  if ( $redirect_url == "/" ){
+  if ( $redirect_url == "/portal" ){
     $results = true;
   }
   elseif ($redirect_url == "/portal/ytd-videos" ){

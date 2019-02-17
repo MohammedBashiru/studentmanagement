@@ -1,5 +1,9 @@
 <?php
-
+	if(!isset($_SESSION)){ 
+	    session_start();
+	} 
+	ob_start();
+	
 	require_once __DIR__ . "/../Traits/DatabaseAPI.php";
 	require_once __DIR__ . "/../Traits/Utils.php";
 
@@ -19,6 +23,14 @@
 
 				$results = DatabaseModel::loginStudent($username, $password);
 				if ( $results ){
+
+					$time = $_SERVER['REQUEST_TIME'];
+ 					$_SESSION["student_id"] = $results["id"];
+ 					$_SESSION["username"] = $results["email"];
+ 					$_SESSION["full_name"] = $results["first_name"] . " " . $results["last_name"];
+ 					$_SESSION["isStudentLogin"] = true;
+ 					$_SESSION['LOGIN_TIME'] = $time;
+
 					$response["status"] = 200;
 	                $response["message"] = "Login successful";
 					return Utils::sendResponse(200, $response);

@@ -157,7 +157,7 @@
   					data: dataToBeSent,
   					contentType: "application/json",
   					success: function(data){
-  						location.href= "/";
+  						location.href= "/portal";
   					},
   					error: function(e){
   						console.log('Error occured with request ', e.responseJSON.message)

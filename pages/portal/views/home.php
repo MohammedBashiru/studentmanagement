@@ -1,16 +1,25 @@
 <?php 
-	// if(!isset($_SESSION)){ 
-	//     session_start();
-	// } 
-	// ob_start();
+	if(!isset($_SESSION)){ 
+	    session_start();
+	} 
+	ob_start();
 
-	// require "../auth/auth.php"; 
-	// $auth = new AUTH();
-	// $auth->isLogin();
+	require "../../../auth/auth.php"; 
+	$auth = new Auth();
+	$auth->isStudentLogin();
 
 	include "../includes/header.php";
 	include "../includes/top-bar.php";
 	include "../includes/side-bar.php";
+
+	include_once "../../../api/controllers/Controllers.php";
+  
+  	$results = StudentController::getStudentResults();
+  	$cont = new StudentController();
+
+  	// echo '<pre>';
+  	// var_dump($results);
+  	// echo '<pre>';
 ?>
 
 <!-- partial -->
@@ -41,16 +50,31 @@
 	                        </tr>
 	                      </thead>
 	                      <tbody>
-	                        <tr>
-	                          <td></td>
-	                          <td></td>
-	                          <td></td>
-	                          <td></td>
-	                          <td></td>
-	                          <td></td>
-	                          <td></td>
-	                          <td></td>
+	                      <?php foreach ($results as $result) {
+	                      	echo ('<tr>'.
+	                          '<td>' . $result["id"] . '</td>'.
+	                          '<td>' . $result["course"] . '</td>'.
+	                          '<td>' . $result["test"] . '</td>'.
+	                          '<td>' . $result["exams"] . '</td>'.
+	                          '<td>' . $result["total"] . '</td>'.
+	                          '<td>' . $cont->getGradeColor($result["grade"]) . '</td>'.
+	                          '<td>' . $result["term"] . '</td>'.
+	                          '<td>' . $result["year"] . '</td>'.
+	                        '</tr>');
+	                      } ?>
+
+	                      <?php foreach ($results as $result ) : ?>
+	                      	<tr>
+		                        <td><?= $result["id"] ?></td>
+		                        <td><?= $result["course"] ?></td>
+		                        <td><?= $result["test"] ?></td>
+		                        <td><?= $result["exams"] ?></td>
+		                        <td><?= $result["total"] ?></td>
+		                        <td><span style="background-color: <?= $cont->getGradeColorCode($result["grade"]) ?>; color: white; border-radius: 5px; padding: 5px"><?= $result["grade"]; ?></span></td>
+		                        <td><?= $result["term"] ?></td>
+		                        <td><?= $result["year"] ?></td>
 	                        </tr>
+	                      <?php endforeach; ?>
 	                      </tbody>
 	                    </table>
 	                  </div>
