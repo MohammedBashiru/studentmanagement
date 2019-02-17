@@ -19,6 +19,36 @@
 
 		}
 
+		public function registerStudent($data){
+			global $conn;
+
+			$username = $data["username"];
+			$password = $data["password"];
+			$firstname = $data["firstname"];
+			$lastname = $data["lastname"];
+			$age = $data["age"];
+			$gender = $data["gender"];
+			$status = 1;
+
+			$sql = "INSERT INTO `students` ( username, password, first_name, last_name, gender, age, status ) VALUES ( :username, :password, :firstname, :lastname, :age, :gender, :status)";
+
+			$stmt = $conn->prepare($sql);
+			$stmt->bindParam(":username", $username, PDO::PARAM_STR);
+			$stmt->bindParam(":password", $password, PDO::PARAM_STR);
+			$stmt->bindParam(":firstname", $firstname, PDO::PARAM_STR);
+			$stmt->bindParam(":lastname", $lastname, PDO::PARAM_STR);
+			$stmt->bindParam(":gender", $gender, PDO::PARAM_STR);
+			$stmt->bindParam(":age", $age, PDO::PARAM_INT);
+			$stmt->bindParam(":status", $status, PDO::PARAM_INT);
+
+			$stmt->execute();
+
+			return true;
+
+
+
+		}
+
 		public function getStudentInfo(){
 			global $conn;
 

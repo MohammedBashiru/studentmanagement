@@ -22,7 +22,7 @@
             //--------------------------
             // REGISTERATION ACTIONS
             //--------------------------
-            case 102: //--Register User
+            case 101: //--Register User
                 $response = StudentController::registerStudent($data);
                 echo json_encode($response);
                 break;

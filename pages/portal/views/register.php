@@ -1,25 +1,7 @@
 <?php 
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
-
-  	$method = $_SERVER['REQUEST_METHOD'];
-
-	$error = false;
-	$msg = "";
-	if ( $method == "POST" ) {
-	    $process = $api->loginAdmin($_POST);
-	    // var_dump($process);
-	    if ( $process["status"] == "success" )
-	    {
-	      header("location: /admin");
-	      // var_dump($process);
-	    }else{
-	      $error = true;
-	      $msg = $process["message"];
-	    }
-	}
-
+	// ini_set('display_errors', 1);
+	// ini_set('display_startup_errors', 1);
+	// error_reporting(E_ALL);
 
 ?>
 
@@ -98,6 +80,17 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="label">Agge</label>
+                  <div class="input-group">
+                    <input type="number" class="form-control" placeholder="Enter Your Age" id="age" name="age">
+                    <div class="input-group-append">
+                      <span class="input-group-text">
+                        <i class="mdi mdi-check-circle-outline"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label class="label">Gender</label>
                   <div class="input-group">
                     <select id="gender" class="form-control">
@@ -163,6 +156,7 @@
         const password = $("#password").val();
         const firstname = $("#firstname").val();
         const lastname = $("#lastname").val();
+        const age = $("#age").val();
   			const gender = $("#gender").val();
 
   			if ( username == "" ){
@@ -178,6 +172,9 @@
         else if (lastname == "" ){
           showErrorAlert("Please enter Your Last Name");
         }
+        else if (age == "" ){
+          showErrorAlert("Please enter Your Age");
+        }
         else if (gender == "" ){
           showErrorAlert("Please enter Your Gender");
         }
@@ -187,30 +184,43 @@
   				//Before sending to server
 
   				const dataToBeSent = JSON.stringify({
-  					action: 100,
+  					action: 101,
   					data: {
   						username: username,
   						password: password,
               firstname: firstname,
               lastname: lastname,
+              age : age,
               gender: gender
   					}
   				})
 
           console.log(dataToBeSent);
-  				// $.ajax({
-  				// 	url: '../../../api/request.php',
-  				// 	method: 'post',
-  				// 	data: dataToBeSent,
-  				// 	contentType: "application/json",
-  				// 	success: function(data){
-  				// 		location.href= "/portal";
-  				// 	},
-  				// 	error: function(e){
-  				// 		console.log('Error occured with request ', e.responseJSON.message)
-  				// 		showErrorAlert(e.responseJSON.message)
-  				// 	}
-  				// })
+  				$.ajax({
+  					url: '../../../api/request.php',
+  					method: 'post',
+  					data: dataToBeSent,
+  					contentType: "application/json",
+  					success: function(data){
+              Swal.fire({
+                  title: 'Success',
+                  text: "Your account has been created successfully. Click on Ok to go be sent to login page to login",
+                  type: 'success',
+                  showCancelButton: false,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Ok'
+                }).then((result) => {
+                  if (result.value) {
+                    location.href= "/login";
+                  }
+                })
+  					},
+  					error: function(e){
+  						console.log('Error occured with request ', e.responseJSON.message)
+  						showErrorAlert(e.responseJSON.message)
+  					}
+  				})
   			}
   		})
 

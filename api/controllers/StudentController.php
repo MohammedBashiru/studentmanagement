@@ -20,8 +20,40 @@
 			return DatabaseModel::getStudentResults();
 		}
 
-		public static function registerStudent(){
+		public static function registerStudent($data){
+			$params = ["username", "password", "firstname", "lastname", "age", "gender"];
 			
+			$isValidParam = Utils::issetParam($params, $data);
+
+			if ( $isValidParam ){
+				$data["username"] = trim(strip_tags($data["username"]));
+				$data["password"] = md5($data["username"]);
+				$data["firstname"] = trim(strip_tags($data["firstname"]));
+				$data["lastname"] = trim(strip_tags($data["lastname"]));
+				$data["age"] = trim(strip_tags($data["age"]));
+				$data["gender"] = trim(strip_tags($data["gender"]));
+
+				$save_response = DatabaseModel::registerStudent($data);
+
+				if ( $save_response ){
+					$response["status"] = 200;
+	                $response["message"] = "Registered successfully";
+					return Utils::sendResponse(200, $response);
+
+				}else{
+					$response["status"] = 403;
+	                $response["message"] = "There was an error creating your account please contact Head Master";
+					return Utils::sendResponse(403, $response);
+				}
+				
+
+
+			}
+			else{
+				$response["status"] = 400;
+                $response["message"] = "Invalid or Bad Data";
+				return Utils::sendResponse(400, $response);
+			}
 		}
 
 
