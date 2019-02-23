@@ -27,7 +27,7 @@
 
 			if ( $isValidParam ){
 				$data["username"] = trim(strip_tags($data["username"]));
-				$data["password"] = md5($data["username"]);
+				$data["password"] = md5($data["password"]);
 				$data["firstname"] = trim(strip_tags($data["firstname"]));
 				$data["lastname"] = trim(strip_tags($data["lastname"]));
 				$data["age"] = trim(strip_tags($data["age"]));
@@ -54,6 +54,22 @@
                 $response["message"] = "Invalid or Bad Data";
 				return Utils::sendResponse(400, $response);
 			}
+		}
+
+		public static function getCourseAmount(){
+			return DatabaseModel::getCourseAmount();
+		}
+
+		public function getPaymentHistory(){
+			return DatabaseModel::getPaymentHistory();
+		}
+
+		public function updateStudentPaidStatus($data){
+			return DatabaseModel::updateStudentPaidStatus($data);
+		}
+
+		public function checkPaymentStatus(){
+			return DatabaseModel::checkPaymentStatus();
 		}
 
 

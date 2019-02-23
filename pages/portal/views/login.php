@@ -157,7 +157,7 @@
   					data: dataToBeSent,
   					contentType: "application/json",
   					success: function(data){
-  						location.href= "/portal";
+  						location.href= "/";
   					},
   					error: function(e){
   						console.log('Error occured with request ', e.responseJSON.message)
@@ -165,7 +165,7 @@
   					}
   				})
   			}
-  		})
+  		});
 
 
 

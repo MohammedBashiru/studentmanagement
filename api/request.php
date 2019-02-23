@@ -27,6 +27,16 @@
                 echo json_encode($response);
                 break;
 
+            case 102: //--Register User
+                $response = StudentController::getCourseAmount($data);
+                echo json_encode($response);
+                break;
+
+            case 103: //-- Update Student As Paid
+                $response = StudentController::updateStudentPaidStatus($data);
+                echo json_encode($response);
+                break;
+
             default: // unknown action
                 // ResponseRouter::sendResponse(1003);
                 $response["status"] = 404;

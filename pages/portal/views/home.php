@@ -8,6 +8,8 @@
 	$auth = new Auth();
 	$auth->isStudentLogin();
 
+
+
 	include "../includes/header.php";
 	include "../includes/top-bar.php";
 	include "../includes/side-bar.php";
@@ -15,7 +17,9 @@
 	include_once "../../../api/controllers/Controllers.php";
   
   	$results = StudentController::getStudentResults();
-  	$cont = new StudentController();
+  	$controller = new StudentController();
+
+  	$controller->checkPaymentStatus();
 
   	// echo '<pre>';
   	// var_dump($results);
@@ -57,7 +61,7 @@
 		                        <td><?= $result["test"] ?></td>
 		                        <td><?= $result["exams"] ?></td>
 		                        <td><?= $result["total"] ?></td>
-		                        <td><span style="background-color: <?= $cont->getGradeColorCode($result["grade"]) ?>; color: white; border-radius: 5px; padding: 5px"><?= $result["grade"]; ?></span></td>
+		                        <td><span style="background-color: <?= $controller->getGradeColorCode($result["grade"]) ?>; color: white; border-radius: 5px; padding: 5px"><?= $result["grade"]; ?></span></td>
 		                        <td><?= $result["term"] ?></td>
 		                        <td><?= $result["year"] ?></td>
 	                        </tr>

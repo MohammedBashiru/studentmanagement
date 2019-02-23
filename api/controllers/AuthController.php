@@ -29,6 +29,7 @@
 					{
 						$time = $_SERVER['REQUEST_TIME'];
 	 					$_SESSION["student_id"] = $user["id"];
+	 					$_SESSION["course_id"] = $user["course_id"];
 	 					$_SESSION["username"] = $user["username"];
 	 					$_SESSION["full_name"] = $user["first_name"] . " " . $user["last_name"];
 	 					$_SESSION["isStudentLogin"] = true;

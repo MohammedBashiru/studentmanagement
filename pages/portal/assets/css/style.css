@@ -16301,4 +16301,12 @@ ul {
   .error-page .error-page-divider {
     border-left: 3px solid rgba(255, 255, 255, 0.2); } }
 
-/*# sourceMappingURL=maps/style.css.map */
+
+.margin-bottom-26 {
+  margin-bottom: 26px;
+}
+
+.payment-img {
+  width: 200px;
+  height: 200px;
+}

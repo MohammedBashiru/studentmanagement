@@ -1,5 +1,6 @@
 RewriteEngine on
-RewriteRule ^(portal)?$ /pages/portal/views/home.php [L] 
+RewriteRule ^(/)?$ /pages/portal/views/home.php [L] 
+RewriteRule ^(payments)?$ /pages/portal/views/payments.php [L] 
 RewriteRule ^(login)?$ /pages/portal/views/login.php [L]
 RewriteRule ^(logout)?$ /pages/portal/views/logout.php [L]
 RewriteRule ^(register)?$ /pages/portal/views/register.php [L]

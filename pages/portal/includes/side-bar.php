@@ -13,16 +13,16 @@
   // die();
   $redirect_url = $_SERVER["REDIRECT_URL"];
 
-  if ( $redirect_url == "/portal" ){
+  if ( $redirect_url == "/" ){
     $results = true;
   }
-  elseif ($redirect_url == "/portal/ytd-videos" ){
+  elseif ($redirect_url == "ytd-videos" ){
     $ytd = true;
   }
-  elseif ($redirect_url == "/portal/downloads" ){
+  elseif ($redirect_url == "downloads" ){
     $downloads = true;
   }
-  elseif ($redirect_url == "/portal/payments" ){
+  elseif ($redirect_url == "payments" ){
     $payments = true;
   }
 
@@ -56,7 +56,7 @@
                 echo 'active';
                }
              ?>">
-            <a class="nav-link" href="/portal">
+            <a class="nav-link" href="/">
               <i class="menu-icon mdi mdi-content-paste"></i>
               <span class="menu-title">Results</span>
             </a>
@@ -66,7 +66,7 @@
                 echo 'active';
                }
              ?>">
-            <a class="nav-link" href="/portal/ytd-videos">
+            <a class="nav-link" href="/ytd-videos">
               <i class="menu-icon mdi mdi-calendar-text"></i>
               <span class="menu-title">Timetable</span>
             </a>
@@ -76,7 +76,7 @@
                 echo 'active';
                }
              ?>"">
-            <a class="nav-link" href="/portal/downloads">
+            <a class="nav-link" href="/downloads">
               <i class="menu-icon mdi mdi-file-document-box"></i>
               <span class="menu-title">Noticeboard</span>
             </a>
@@ -96,7 +96,7 @@
                 echo 'active';
                }
              ?>"">
-            <a class="nav-link" href="/portal/payments">
+            <a class="nav-link" href="/payments">
               <i class="menu-icon mdi mdi-bank"></i>
               <span class="menu-title">Payments</span>
             </a>

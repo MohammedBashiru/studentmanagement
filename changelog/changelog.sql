@@ -67,8 +67,27 @@
 
 	ALTER TABLE `results` CHANGE `score` `exams` DOUBLE NOT NULL;
 
+	-- 23/02/2019
+	CREATE TABLE `course` (
+	 `id` int(11) NOT NULL AUTO_INCREMENT,
+	 `title` varchar(300) NOT NULL,
+	 `start_date` datetime NOT NULL,
+	 `amount` double NOT NULL,
+	 PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+	CREATE TABLE `payments` (
+	 `id` int(11) NOT NULL AUTO_INCREMENT,
+	 `student_id` int(11) NOT NULL,
+	 `amount` double NOT NULL,
+	 `date` datetime NOT NULL,
+	 PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
+	ALTER TABLE `payments` CHANGE `date` `payment_date` DATETIME NOT NULL;
+	ALTER TABLE `payments` ADD `transaction_id` VARCHAR(300) NOT NULL AFTER `payment_date`;
+	ALTER TABLE `payments` ADD `status` VARCHAR(100) NOT NULL AFTER `transaction_id`;
+	ALTER TABLE `students` ADD `has_paid` TINYINT NOT NULL DEFAULT '0' AFTER `status`;
 
 
 
