@@ -31,6 +31,7 @@
 	 					$_SESSION["student_id"] = $user["id"];
 	 					$_SESSION["course_id"] = $user["course_id"];
 	 					$_SESSION["username"] = $user["username"];
+	 					$_SESSION["profile"] = $user["profile_image"];
 	 					$_SESSION["full_name"] = $user["first_name"] . " " . $user["last_name"];
 	 					$_SESSION["isStudentLogin"] = true;
 	 					$_SESSION['LOGIN_TIME'] = $time;

@@ -88,7 +88,7 @@
                 </div>
                 <div class="text-block text-center my-3">
                   <span class="text-small font-weight-semibold">Not a member ?</span>
-                  <a href="#" class="text-black text-small">Create new account</a>
+                  <a href="/register" class="text-black text-small">Create new account</a>
                 </div>
               </form>
             </div>

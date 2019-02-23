@@ -91,7 +91,7 @@
 	                             <?= 'GH¢ ' . number_format($payment["amount"], 2); ?>
 	                          </td>
 	                          <td>
-	                            <?= substr($payment["date"], 0, 10) ?>
+	                            <?= substr($payment["payment_date"], 0, 10) ?>
 	                          </td>
 	                          <td>
 	                          	<?php if ( $payment["status"] == "paid" ) : ?>
@@ -311,6 +311,7 @@
  					updateUsersPaymentStatus();
  				}
  				else {
+ 					$("#proceedPayment").attr("disabled", false);
  					showErrorAlert("We couldn't authroze your payment at this time please try again later")
  				}
 			},

@@ -38,7 +38,11 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="../pages/portal/assets/nerd.png" alt="profile image">
+                  <?php if ( $_SESSION["profile"] ) : ?>
+                    <img src="<?= $_SESSION["profile"] ?>" alt="profile image">
+                  <?php else :  ?>
+                   <img src="../pages/portal/assets/faces/user.png" alt="profile image">
+                  <?php endif; ?>
                 </div>
                 <div class="text-wrapper">
                   <p class="profile-name"><?= $_SESSION['full_name']; ?></p>

@@ -28,11 +28,13 @@
 			$lastname = $data["lastname"];
 			$age = $data["age"];
 			$gender = $data["gender"];
+			$course_id = $data["course"];
 			$status = 1;
 
-			$sql = "INSERT INTO `students` ( username, password, first_name, last_name, gender, age, status ) VALUES ( :username, :password, :firstname, :lastname, :age, :gender, :status)";
+			$sql = "INSERT INTO `students` ( course_id, username, password, first_name, last_name, gender, age, status ) VALUES ( :course_id, :username, :password, :firstname, :lastname, :age, :gender, :status)";
 
 			$stmt = $conn->prepare($sql);
+			$stmt->bindParam(":course_id", $course_id, PDO::PARAM_INT);
 			$stmt->bindParam(":username", $username, PDO::PARAM_STR);
 			$stmt->bindParam(":password", $password, PDO::PARAM_STR);
 			$stmt->bindParam(":firstname", $firstname, PDO::PARAM_STR);
@@ -116,6 +118,7 @@
 			$transaction_id = self::generationPaymentHash();
 			$status = "pending";
 			$amount = $course["amount"];
+			$date = date('Y-m-d h:m:a');
 
 
 			$sql_insert = "INSERT INTO `payments` (student_id, amount, payment_date, transaction_id, status) VALUES (:student_id, :amount, :payment_date, :transaction_id, :status)";
@@ -123,7 +126,7 @@
 			$stmt = $conn->prepare($sql_insert);
 			$stmt->bindParam(":student_id", $student_id, PDO::PARAM_INT);
 			$stmt->bindParam(":amount", $amount, PDO::PARAM_STR);
-			$stmt->bindParam(":payment_date", date('Y-m-d h:m:a'));
+			$stmt->bindParam(":payment_date", $date);
 			$stmt->bindParam(":transaction_id", $transaction_id, PDO::PARAM_STR);
 			$stmt->bindParam(":status", $status, PDO::PARAM_STR);
 			$stmt->execute();
@@ -158,7 +161,7 @@
 			$sql = "UPDATE `payments` SET `status` = :paid WHERE `transaction_id` = :order_id";
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":order_id", $order_id, PDO::PARAM_STR);
-			$stmt->bindParam(":paid", $paid, PDO::PARAM_INT);
+			$stmt->bindParam(":paid", $paid, PDO::PARAM_STR);
 			$stmt->execute();
 
 			return true;
@@ -183,6 +186,19 @@
 			else {
 				header("location: /payments");
 			}
+		}
+
+		public function getCourses(){
+			global $conn;
+
+			$sql = "SELECT * FROM `course`";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute();
+
+			//Fetch all means fetch all records
+			$response = $stmt->fetchAll();
+
+			return $response;
 		}
 
 		public function generationPaymentHash(){

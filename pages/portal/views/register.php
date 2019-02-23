@@ -2,6 +2,11 @@
 	// ini_set('display_errors', 1);
 	// ini_set('display_startup_errors', 1);
 	// error_reporting(E_ALL);
+  include_once "../../../api/controllers/Controllers.php";
+  
+    $controller = new StudentController();
+
+    $courses = $controller->getCourses();
 
 ?>
 
@@ -80,7 +85,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="label">Agge</label>
+                  <label class="label">Age</label>
                   <div class="input-group">
                     <input type="number" class="form-control" placeholder="Enter Your Age" id="age" name="age">
                     <div class="input-group-append">
@@ -100,19 +105,20 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label class="label">Course</label>
+                  <div class="input-group">
+                    <select id="course" class="form-control" required>
+                      <option  value="" selected>Select Course...</option>
+                      <?php foreach ($courses as $course ) : ?>
+                        <option  value="<?= $course['id'] ?>"><?=  $course["title"] ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
                   <button class="btn btn-primary submit-btn btn-block" id="submitBtn" type="button">Register</button>
                 </div>
                 <div class="form-group d-flex justify-content-between">
-                  <div class="form-check form-check-flat mt-0">
-                    <label class="form-check-label">
-                      <input type="checkbox" class="form-check-input" checked> Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="text-small forgot-password text-black">Forgot Password</a>
-                </div>
-                <div class="text-block text-center my-3">
-                  <span class="text-small font-weight-semibold">Not a member ?</span>
-                  <a href="#" class="text-black text-small">Create new account</a>
                 </div>
               </form>
             </div>
@@ -158,6 +164,7 @@
         const lastname = $("#lastname").val();
         const age = $("#age").val();
   			const gender = $("#gender").val();
+        const course = $("#course").val();
 
   			if ( username == "" ){
   				showErrorAlert("Please enter username");
@@ -176,7 +183,10 @@
           showErrorAlert("Please enter Your Age");
         }
         else if (gender == "" ){
-          showErrorAlert("Please enter Your Gender");
+          showErrorAlert("Please choose your gender");
+        }
+        else if (course == "" ){
+          showErrorAlert("Please choose a course");
         }
   			else  {
 
@@ -191,7 +201,8 @@
               firstname: firstname,
               lastname: lastname,
               age : age,
-              gender: gender
+              gender: gender,
+              course: course
   					}
   				})
 

@@ -7,7 +7,7 @@ RewriteRule ^(register)?$ /pages/portal/views/register.php [L]
 
 
 # Student Portal
-RewriteRule ^(portal/profile)?$ /pages/portal/views/profile.php [L]
+RewriteRule ^(profile)?$ /pages/portal/views/profile.php [L]
 
 
 ErrorDocument 404 /pages/404.php

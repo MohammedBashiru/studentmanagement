@@ -20,6 +20,9 @@
 			return DatabaseModel::getStudentResults();
 		}
 
+		/**
+		* This methods registers student
+		*/
 		public static function registerStudent($data){
 			$params = ["username", "password", "firstname", "lastname", "age", "gender"];
 			
@@ -56,20 +59,38 @@
 			}
 		}
 
+		/**
+		* This returns students course amount and saves payment logs with status as pending
+		* Status is updated once payment is confirmed
+		*/
 		public static function getCourseAmount(){
 			return DatabaseModel::getCourseAmount();
 		}
 
+		/**
+		* Get Students Payment History
+		*/
 		public function getPaymentHistory(){
 			return DatabaseModel::getPaymentHistory();
 		}
 
+		/**
+		* Change Student has_paid fields to true
+		*/
 		public function updateStudentPaidStatus($data){
 			return DatabaseModel::updateStudentPaidStatus($data);
 		}
 
+		/**
+		* Check If Student Has Paid Else Redirect To Payment Page
+		*/
 		public function checkPaymentStatus(){
 			return DatabaseModel::checkPaymentStatus();
+		}
+
+
+		public function getCourses(){
+			return DatabaseModel::getCourses();
 		}
 
 
